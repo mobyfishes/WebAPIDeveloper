@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 class DataNotFoundAdvice {
 
+    /**
+     * Render not found error into response body
+     * @param ex not found exception
+     * @return  not found exception response body
+     */
     @ResponseBody
     @ExceptionHandler(DataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

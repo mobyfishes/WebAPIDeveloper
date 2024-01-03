@@ -21,6 +21,10 @@ public class TransactionService {
     @Autowired
     RewardRepository rewardRepository;
 
+    /**
+     * Processing transaction record and store them into database as Rewards entity
+     * @param transactions a record of every transaction during a three-month period
+     */
     public void calculateRewards(List<Transaction> transactions) {
         Map<String, Map<String, Integer>> results = new HashMap<>();
 
@@ -36,7 +40,12 @@ public class TransactionService {
         persistRewards(results);
     }
 
-
+    /**
+     * Find all Rewards from database and calculate total points
+     * @param id customerId
+     * @return  JSON string of found total rewards points by given customerId
+     * @throws DataNotFoundException No data found related to given customerId
+     */
     public String findTotalRewardById(Integer id) throws DataNotFoundException{
         Map<Integer, Integer > results = new HashMap<>();
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
@@ -55,6 +64,13 @@ public class TransactionService {
         return convertMapToJson(results);
     }
 
+
+    /**
+     * Find Rewards from database and calculate monthly points
+     * @param id customerId
+     * @return  JSON string of found monthly rewards points by given customerId
+     * @throws DataNotFoundException No data found related to given customerId
+     */
     public String findMonthRewardById(Integer id) throws DataNotFoundException{
         Map<String, Integer > results = new HashMap<>();
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
@@ -71,6 +87,12 @@ public class TransactionService {
         return convertMapToJson(results);
     }
 
+    /**
+     * Find Rewards from database and calculate total and monthly points
+     * @param id customerId
+     * @return  JSON string of found otal and monthly rewards points by given customerId
+     * @throws DataNotFoundException No data found related to given customerId
+     */
     public String findRewardsById(Integer id) {
         Map<String, Map<String, Integer>> result = new HashMap<>();
 
@@ -94,6 +116,11 @@ public class TransactionService {
         return convertMapToJson(result);
 
     }
+
+    /**
+     * Parse translation record into reward entity and save into database
+     * @param result record of all translations
+     */
     private void persistRewards(Map<String, Map<String, Integer>> result){
         for (Map.Entry<String, Map<String, Integer>> entry : result.entrySet()) {
             String customerId = entry.getKey();
@@ -116,19 +143,26 @@ public class TransactionService {
         }
     }
 
+    /**
+     * Convert map into JSON
+     * @param results map stored data
+     * @return JSON String
+     */
     private <K, V> String convertMapToJson(Map<K, V> results){
         try {
-            // Create ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
-            // Convert map to JSON
             return objectMapper.writeValueAsString(results);
         } catch (Exception e) {
-            // Handle the exception
             e.printStackTrace();
             return null;
         }
     }
 
+    /**
+     * Calculate reward points from transaction data
+     * @param amount total cost amount in a transaction
+     * @return  reward points
+     */
     private int calculateRewardPoints(Double amount) {
         int points = 0;
         if(amount > 50 && amount <= 100){

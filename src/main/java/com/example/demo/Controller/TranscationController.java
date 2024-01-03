@@ -41,4 +41,5 @@ public class TranscationController {
         String resultsJson = transcationService.findRewardsById(id);
         return ResponseEntity.ok(resultsJson);
     }
+
 }

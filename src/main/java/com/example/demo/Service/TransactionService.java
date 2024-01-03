@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class TransactionService {
     public String findTotalRewardById(Integer id) throws DataNotFoundException{
         Map<Integer, Integer > results = new HashMap<>();
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
+        rewardList.sort(Comparator.comparing(Reward::getTransactionDate));
 
         if(rewardList.size() == 0){
             throw new DataNotFoundException("No rewards record found for this customer id: " + id);
@@ -56,6 +58,7 @@ public class TransactionService {
     public String findMonthRewardById(Integer id) throws DataNotFoundException{
         Map<String, Integer > results = new HashMap<>();
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
+        rewardList.sort(Comparator.comparing(Reward::getTransactionDate));
 
         if(rewardList.size() == 0){
             throw new DataNotFoundException("No rewards record found for this customer id: " + id);
@@ -73,6 +76,8 @@ public class TransactionService {
 
         Integer totalPoints = 0;
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
+        rewardList.sort(Comparator.comparing(Reward::getTransactionDate));
+
         if(rewardList.size() == 0){
             throw new DataNotFoundException("No rewards record found for this customer id: " + id);
         }

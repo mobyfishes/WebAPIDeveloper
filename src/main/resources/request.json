@@ -1,0 +1,36 @@
+[
+    {
+        "customerId" : "1",
+        "transactionDate" : "2023-02-25",
+        "amount" : "120.00"
+    },    
+    {
+        "customerId" : "1",
+        "transactionDate" : "2023-12-25",
+        "amount" : "120.00"
+    },
+    {
+        "customerId" : "1",
+        "transactionDate" : "2023-02-15",
+        "amount" : "50.00"
+    },
+        {
+        "customerId" : "1",
+        "transactionDate" : "2023-05-15",
+        "amount" : "10.00"
+    },    {
+        "customerId" : "2",
+        "transactionDate" : "2023-02-25",
+        "amount" : "120.00"
+    },
+    {
+        "customerId" : "3123142",
+        "transactionDate" : "2023-02-15",
+        "amount" : "50.00"
+    },
+        {
+        "customerId" : "1231",
+        "transactionDate" : "2023-05-15",
+        "amount" : "10.00"
+    }
+]

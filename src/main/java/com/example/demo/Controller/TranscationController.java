@@ -18,30 +18,27 @@ public class TranscationController {
     @Autowired
     TransactionService transcationService;
 
-
     @PostMapping("/Transaction")
     public ResponseEntity<HttpStatus> calculateAllRewards(@RequestBody List<Transaction> transactions) {
-        Map<String, Map<String, Integer>> result  = transcationService.calculateRewards(transactions);
+        transcationService.calculateRewards(transactions);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/Total/{id}")
-    public ResponseEntity<Map<Integer, Integer>> getTotalRewardsById(@PathVariable Integer id) {
-        Map<Integer, Integer> totalPoints = new HashMap<>();
-        totalPoints.put(id, transcationService.findTotalRewardById(id));
-        return  ResponseEntity.ok(totalPoints);
+    public ResponseEntity<String> getTotalRewardsById(@PathVariable Integer id) {
+        String resultsJson =  transcationService.findTotalRewardById(id);
+        return ResponseEntity.ok(resultsJson);
     }
 
     @GetMapping("/Month/{id}")
-    public ResponseEntity<Map<Integer, Map<String, Integer >>> getMonthRewardsById(@PathVariable Integer id) {
-        Map<Integer, Map<String, Integer >> totalPoints = new HashMap<>();
-        totalPoints.put(id, transcationService.findMonthRewardById(id));
-        return  ResponseEntity.ok(totalPoints);
+    public ResponseEntity<String> getMonthRewardsById(@PathVariable Integer id) {
+        String resultsJson = transcationService.findMonthRewardById(id);
+        return ResponseEntity.ok(resultsJson);
     }
 
     @GetMapping("/Rewards/{id}")
-    public ResponseEntity<Map<String, Map<String, Integer >>> getRewardsById(@PathVariable Integer id) {
-        Map<String, Map<String, Integer >> results = transcationService.findRewardsById(id);
-        return  ResponseEntity.ok(results);
+    public ResponseEntity<String> getRewardsById(@PathVariable Integer id) {
+        String resultsJson = transcationService.findRewardsById(id);
+        return ResponseEntity.ok(resultsJson);
     }
 }

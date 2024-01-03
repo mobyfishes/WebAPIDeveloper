@@ -73,6 +73,10 @@ public class TransactionService {
 
         Integer totalPoints = 0;
         List<Reward> rewardList = rewardRepository.getRewardByCustomerId(id);
+        if(rewardList.size() == 0){
+            throw new DataNotFoundException("No rewards record found for this customer id: " + id);
+        }
+
         Map<String, Integer> rewardRecord = new HashMap<>();
         for(Reward reward : rewardList){
             rewardRecord.put(reward.getTransactionDate(), reward.getPoints());

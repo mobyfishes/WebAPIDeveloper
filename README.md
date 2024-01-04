@@ -39,3 +39,5 @@ And `RewardRepository` basic DAO layer persists rewards and supports simple quer
 - **Path Variable**: `id` - Customer ID
 - **Response**: JSON string representing both total and monthly rewards for the specified customer.
 
+### Example record of transactions
+- `src/main/resources/request.json`

@@ -1,9 +1,12 @@
 # WebAPIDeveloper
 
 
-This is a Demo for Assessment implemented by Spring Boot and RESTful API  for managing transaction-related operations. T
+This is a Demo for Assessment implemented by Spring Boot and RESTful API  for managing transaction-related operations. 
+
 This controller handles transactions and their associated rewards within a three-month period. 
+
 It interacts with the `TransactionService` to perform the necessary calculations and retrieve reward information.
+
 And basic DAO layer to persist transactions and rewards supports simple queries for searching.
 
 ## Endpoints
